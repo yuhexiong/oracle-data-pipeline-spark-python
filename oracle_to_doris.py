@@ -20,10 +20,10 @@ df.show(10)
 
 processed_df = df \
     .select(
-        col("BOOK_ID").alias("book_id"),
+        col("BOOKID").alias("book_id"),
         col("TITLE").alias("title"),
         col("AUTHOR").alias("author"),
-        col("PUBLICATION_YEAR").alias("publication_year"),
+        col("PUBLICATIONYEAR").alias("publication_year"),
         col("GENRE").alias("genre"),
         col("RATING").alias("rating"),
         col("STATUS").alias("status")

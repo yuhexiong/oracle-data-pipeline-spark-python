@@ -1,0 +1,26 @@
+source:
+  url: "jdbc:oracle:thin:@host:port:service"
+  dbtable: "schema.table"
+  user: "user"
+  password: "password"
+process:
+  fields:
+    - name: BOOKID
+      alias: book_id
+    - name: TITLE
+      alias: title
+    - name: AUTHOR
+      alias: author
+    - name: PUBLICATIONYEAR
+      alias: publication_year
+    - name: GENRE
+      alias: genre
+    - name: RATING
+      alias: rating
+    - name: STATUS
+      alias: status
+sink:
+  feNodes: host:port
+  table: database.table
+  user: user
+  password: password
