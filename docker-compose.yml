@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  spark:
+    build: .
+    container_name: spark
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: bash -c "python3 oracle_to_doris_yaml.py -f oracle_to_doris.yaml"
