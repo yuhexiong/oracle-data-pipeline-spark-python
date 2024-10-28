@@ -22,6 +22,9 @@ docker compose up -d
 
 ### Oracle To Doris
 
+Replace newline characters with an empty string.  
+Fill RATING column NULL values with 0.  
+
 code refer to  
 (1) [oracle_to_doris.py](oracle_to_doris.py)  
 (2) define schema in yaml [oracle_to_doris_yaml.py](oracle_to_doris_yaml.py) and [oracle_to_doris.yaml](oracle_to_doris.yaml)  

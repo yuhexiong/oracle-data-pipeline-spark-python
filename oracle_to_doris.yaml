@@ -17,6 +17,7 @@ process:
       alias: genre
     - name: RATING
       alias: rating
+      default: 0
     - name: STATUS
       alias: status
 sink:

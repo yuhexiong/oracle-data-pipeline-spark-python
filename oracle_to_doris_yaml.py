@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, regexp_replace, when, lit
 import yaml
 import argparse
 
@@ -32,7 +32,14 @@ df.show(5)
 process = config['process']
 selected_columns = []
 for field in process["fields"]:
-    column = col(field['name']).alias(field['alias'])
+    # regex
+    column = regexp_replace(col(field['name']), r"(\r\n|\n|\r|\t|\r)", "").alias(field['alias'])
+
+    # default
+    if "default" in field:
+        column = when(column.isNull(), lit(field["default"])).otherwise(column)
+
+    column = column.alias(field['alias'])
     selected_columns.append(column)
 processed_df = df.select(*selected_columns)
 

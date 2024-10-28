@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
+from pyspark.sql.functions import col, regexp_replace, when, lit
 
 spark = SparkSession.builder \
     .appName("MySparkApp") \
@@ -18,15 +18,19 @@ df = spark.read \
 
 df.show(10)
 
+pattern = r"(\r\n|\n|\r|\t|\r)"
 processed_df = df \
     .select(
-        col("BOOKID").alias("book_id"),
-        col("TITLE").alias("title"),
-        col("AUTHOR").alias("author"),
-        col("PUBLICATIONYEAR").alias("publication_year"),
-        col("GENRE").alias("genre"),
-        col("RATING").alias("rating"),
-        col("STATUS").alias("status")
+        regexp_replace(col("BOOKID"), pattern, "").alias("book_id"),
+        regexp_replace(col("TITLE"), pattern, "").alias("title"),
+        regexp_replace(col("AUTHOR"), pattern, "").alias("author"),
+        regexp_replace(col("PUBLICATIONYEAR"), pattern,"").alias("publication_year"),
+        regexp_replace(col("GENRE"), pattern, "").alias("genre"),
+        regexp_replace(col("RATING"), pattern, "").alias("rating"),
+        when(regexp_replace(col("RATING"), pattern, "").isNull(), lit(0))
+            .otherwise(regexp_replace(col("RATING"), pattern, ""))
+            .alias("wo_create_date"),
+        regexp_replace(col("STATUS"), pattern, "").alias("status")
     )
 
 # save doris
