@@ -21,6 +21,7 @@ with open(args.file, "r") as file:
 source = config['source']
 df = spark.read \
     .format("jdbc") \
+    .option("driver", "oracle.jdbc.driver.OracleDriver") \
     .option("url", source["url"]) \
     .option("dbtable", source["dbtable"]) \
     .option("user", source["user"]) \

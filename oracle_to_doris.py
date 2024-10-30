@@ -10,6 +10,7 @@ spark.sparkContext.setLogLevel("WARN")
 # read oracle
 df = spark.read \
     .format("jdbc") \
+    .option("driver", "oracle.jdbc.driver.OracleDriver") \
     .option("url", "jdbc:oracle:thin:@host:port:service") \
     .option("dbtable", "schema.table") \
     .option("user", "user") \
