@@ -17,9 +17,6 @@ RUN apt-get install -y tzdata && \
 # Install Doris
 RUN wget -qO /opt/spark/jars/spark-doris-connector-3.3_2.12-1.3.1.jar https://repo1.maven.org/maven2/org/apache/doris/spark-doris-connector-3.3_2.12/1.3.1/spark-doris-connector-3.3_2.12-1.3.1.jar  
 
-# Install JDBC
-RUN curl -o /opt/spark/jars/postgresql-42.6.0.jar https://repo1.maven.org/maven2/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar
-
 # Install Oracle JDBC
 RUN wget -qO /opt/spark/jars/ojdbc8.jar https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/19.16.0.0/ojdbc8-19.16.0.0.jar
 

@@ -2,8 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, regexp_replace, when, lit
 
 spark = SparkSession.builder \
-    .appName("MySparkApp") \
-    .config("spark.some.config.option", "config-value") \
+    .appName("oracle_to_doris") \
     .getOrCreate()
 spark.sparkContext.setLogLevel("WARN")
 
@@ -17,7 +16,7 @@ df = spark.read \
     .option("password", "password") \
     .load()
 
-df.show(10)
+df.show()
 
 pattern = r"(\r\n|\n|\r|\t|\r)"
 processed_df = df \
@@ -39,7 +38,7 @@ ds = processed_df \
     .write \
     .mode("append") \
     .format("doris") \
-    .option("checkpointLocation", "./checkpoint") \
+    .option("checkpointLocation", "./checkpoint/table") \
     .option("doris.table.identifier", "database.table") \
     .option("doris.fenodes", "host:port") \
     .option("user", "user") \

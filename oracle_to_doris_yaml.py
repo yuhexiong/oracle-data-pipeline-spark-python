@@ -4,8 +4,7 @@ import yaml
 import argparse
 
 spark = SparkSession.builder \
-    .appName("MySparkApp") \
-    .config("spark.some.config.option", "config-value") \
+    .appName("oracle_to_doris_yaml") \
     .getOrCreate()
 spark.sparkContext.setLogLevel("WARN")
 
@@ -28,7 +27,7 @@ df = spark.read \
     .option("password", source["password"]) \
     .load()
 
-df.show(5)
+df.show()
 
 process = config['process']
 selected_columns = []
@@ -50,7 +49,7 @@ ds = processed_df \
     .write \
     .mode("append") \
     .format("doris") \
-    .option("checkpointLocation", "./checkpoint") \
+    .option("checkpointLocation", f"./checkpoint/{sink["table"]}") \
     .option("doris.table.identifier", sink["table"]) \
     .option("doris.fenodes", sink["feNodes"]) \
     .option("user", sink["user"]) \
