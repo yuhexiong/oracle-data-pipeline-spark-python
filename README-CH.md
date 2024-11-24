@@ -1,20 +1,18 @@
 # Oracle Data Pipeline Spark
 
-**(also provided Traditional Chinese version document [README-CH.md](README-CH.md).)**
-
-Data pipeline written by Spark to transfer Oracle to Doris.  
+使用 Spark 撰寫把 Oracle 轉換至 Doris 的資料管道。
 
 ## Overview
 
-- Language: Python
-- Data Processing Framework: Spark v3.5.1
+- 語言: Python
+- 資料轉換框架: Spark v3.5.1
 
 
 ## Run
 
 ### Run Docker Container
 
-edit filename in docker-compose.yaml  
+修改 docker-compose.yaml 裡面的檔名    
 ```
 docker compose up -d
 ```
@@ -24,12 +22,12 @@ docker compose up -d
 
 ### Oracle To Doris
 
-Replace newline characters with an empty string.  
-Fill `RATING` column NULL values with 0.  
+轉換換行符號為空字串  
+將 `RATING` 欄位的 NULL 補值為 0  
 
-code refer to  
+程式碼參考  
 (1) [oracle_to_doris.py](oracle_to_doris.py)  
-(2) define schema in yaml [oracle_to_doris_yaml.py](oracle_to_doris_yaml.py) and [oracle_to_doris.yaml](oracle_to_doris.yaml)  
+(2) 將資料格式定義在 yaml [oracle_to_doris_yaml.py](oracle_to_doris_yaml.py) 和 [oracle_to_doris.yaml](oracle_to_doris.yaml)  
 
 
 - Oracle Table
